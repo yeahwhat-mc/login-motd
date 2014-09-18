@@ -14,4 +14,5 @@ Custom login MOTD to display some useful informations about your servers as soon
 
     cd /usr/src
     git clone https://github.com/yeahwhat-mc/login-motd.git
-    ln -s /usr/src/login-motd/motd.sh /etc/profile.d/motd.sh
+    ln -s /usr/src/login-motd/motd.sh /etc/update-motd.d/10-motd
+    aptitude install update-motd
