@@ -3,7 +3,7 @@ login-motd
 
 Custom login MOTD to display some useful informations about your servers as soon as you login into the shell.
 
-![](http://up.frd.mn/Sld5a.png)
+![](http://up.frd.mn/QjCXU.png)
 
 # Requirements
 
