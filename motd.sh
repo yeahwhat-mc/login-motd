@@ -20,6 +20,8 @@ BIN_DF='/bin/df'
 BIN_AWK='/usr/bin/awk'
 BIN_BC='/usr/bin/bc'
 BIN_PS='/bin/ps'
+BIN_CUT='/usr/bin/cut'
+BIN_XARGS='/usr/bin/xargs'
 
 COLOR_LIGHT_GREEN='\033[1;32m'
 COLOR_LIGHT_BLUE='\033[1;34m'
@@ -34,7 +36,8 @@ ${COLOR_WHITE}Date and time             = ${COLOR_LIGHT_BLUE}$(${BIN_DATE})
 ${COLOR_WHITE}Hostname                  = ${COLOR_LIGHT_BLUE}$(${BIN_HOSTNAME})
 ${COLOR_WHITE}Global IP Addresses       = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show eth0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
 ${COLOR_WHITE}VPN IP Address            = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show tun0 2>/dev/null | ${BIN_GREP} 'inet ' | awk -F" " '{print $2}' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
-${COLOR_WHITE}Uptime                    = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_SED} -e 's/^ //')
+${COLOR_WHITE}Uptime                    = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_CUT} -d "," -f 1 | xargs)
+${COLOR_WHITE}Load avg.                 = ${COLOR_LIGHT_BLUE}$(${BIN_UPTIME} | ${BIN_GREP} -o -e "load averages.*" | ${BIN_SED} -e "s/load averages: //")
 ${COLOR_WHITE}Release                   = ${COLOR_LIGHT_BLUE}$(${BIN_LSB_RELEASE} -d --short)
 ${COLOR_WHITE}Kernel                    = ${COLOR_LIGHT_BLUE}$(${BIN_UNAME} -ro)
 ${COLOR_WHITE}CPU Usage (Core)          = ${COLOR_LIGHT_BLUE}$(echo $(${BIN_PS} -eo pcpu | ${BIN_AWK} 'NR>1' | ${BIN_AWK} '{tot=tot+$1} END {print tot}') / $(${BIN_CAT} /proc/cpuinfo | ${BIN_GREP} -c processor) | ${BIN_BC} )%
