@@ -31,7 +31,7 @@ COLOR_WHITE='\033[1;37m'
 COLOR_DEFAULT='\033[0m'
 
 echo -e "
-${COLOR_LIGHT_GREEN}$(${BIN_FIGLET} -ckw 100 -f slant $(${BIN_HOSTNAME} -s))
+${COLOR_LIGHT_GREEN}$(${BIN_FIGLET} -ckw 80 -f slant $(${BIN_HOSTNAME} -s))
 ${COLOR_WHITE}Date and time             = ${COLOR_LIGHT_BLUE}$(${BIN_DATE})
 ${COLOR_WHITE}Hostname                  = ${COLOR_LIGHT_BLUE}$(${BIN_HOSTNAME})
 ${COLOR_WHITE}Global IP Addresses       = ${COLOR_LIGHT_BLUE}$(${BIN_IP} addr show eth0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/' | ${BIN_SED} ':a;N;$!ba;s/\n/, /g')
